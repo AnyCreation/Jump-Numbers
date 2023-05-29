@@ -15,16 +15,10 @@
 
 """
 
-def SomeJump(list_X):
-    pass
 
 def Jump(list_X):
-    
-    UpDown, Equals = False, False
-    PMSp = [False, False, False]
-    MDSr = [False, False, False]
-    Break = False
-    ThreeEle = False
+    PMSd = [False, False, False] #PMSd --> P - plus, M - multiplication, Sd - Second Degree
+    MDSr = [False, False, False] #MDSr --> M - minus, D - division, Sr - Square Root
 
     if len(list_X) < 3:
         ThreeEle = True
@@ -36,29 +30,29 @@ def Jump(list_X):
             if list_X[1] + (list_X[1] - list_X[0]) == list_X[2]:
                 for i in range(2, len(list_X)):
                     if list_X[i-1] + (list_X[1] - list_X[0]) == list_X[i]:
-                        PMSp[0] = True
-                        return PMSp, UpDown
+                        PMSd[0] = True
+                        return PMSd, UpDown
                     else:
                         Break = True
-                        return Break
+                        return [Break]
                         
             elif list_X[1] * (list_X[1] / list_X[0]) == list_X[2]:
                 for i in range(3, len(list_X)):
                     if list_X[i-1] * (list_X[1] / list_X[0]) == list_X[i]:
-                        PMSp[1] = True
-                        return PMSp, UpDown
+                        PMSd[1] = True
+                        return PMSd, UpDown
                     else:
                         Break = True
-                        return Break
+                        return [Break]
                         
             elif list_X[0] ** 2 == list_X[1]:
-                for i in range(3, len(list_X)):
+                for i in range(0, len(list_X)):
                     if list_X[i-1] ** 2 == list_X[i]:
-                        PMSp[2] = True
-                        return PMSp, UpDown
+                        PMSd[2] = True
+                        return PMSd, UpDown
                     else:
                         Break = True
-                        return Break
+                        return [Break]
 
         #All elements in the list are the same//breaking
         elif list_X[0] == list_X[1]:
@@ -68,7 +62,7 @@ def Jump(list_X):
                     return Equals
                 else:
                     Break = True
-                    return Break
+                    return [Break]
         #Down Jump
         else:
             UpDown = False
@@ -80,7 +74,7 @@ def Jump(list_X):
                         return MDSr, UpDown
                     else:
                         Break = True
-                        return Break
+                        return [Break]
                         
             elif list_X[1] / (list_X[0] / list_X[1]) == list_X[2]:
                 for i in range(3, len(list_X)):
@@ -89,7 +83,7 @@ def Jump(list_X):
                         return MDSr, UpDown
                     else:
                         Break = True
-                        return Break
+                        return [Break]
             
             elif list_X[0] ** 0.5 == list_X[1]:
                 for i in range(2, len(list_X)):
@@ -98,4 +92,8 @@ def Jump(list_X):
                         return MDSr, UpDown 
                     else:
                         Break = True
-                        return Break
+                        return [Break]
+
+if __name__ == '__main__':
+    x = Jump([2, 4, 1, 1, 2])
+    print(x)
